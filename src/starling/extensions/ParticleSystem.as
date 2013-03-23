@@ -184,10 +184,12 @@ package starling.extensions
             if (mIndexBuffer)  mIndexBuffer.dispose();
             
             mVertexBuffer = context.createVertexBuffer(newCapacity * 4, VertexData.ELEMENTS_PER_VERTEX);
-            mVertexBuffer.uploadFromVector(mVertexData.rawData, 0, newCapacity * 4);
-            
+//            mVertexBuffer.uploadFromVector(mVertexData.rawData, 0, newCapacity * 4);
+            mVertexBuffer.uploadFromByteArray(mVertexData.rawData, 0, 0, newCapacity * 4);
+
             mIndexBuffer  = context.createIndexBuffer(newCapacity * 6);
             mIndexBuffer.uploadFromVector(mIndices, 0, newCapacity * 6);
+
         }
         
         /** Starts the emitter for a certain time. @default infinite time */
@@ -357,7 +359,8 @@ package starling.extensions
             
             if (context == null) throw new MissingContextError();
             
-            mVertexBuffer.uploadFromVector(mVertexData.rawData, 0, mNumParticles * 4);
+//            mVertexBuffer.uploadFromVector(mVertexData.rawData, 0, mNumParticles * 4);
+            mVertexBuffer.uploadFromByteArray(mVertexData.rawData, 0, 0, mNumParticles * 4);
             mIndexBuffer.uploadFromVector(mIndices, 0, mNumParticles * 6);
             
             context.setBlendFactors(mBlendFactorSource, mBlendFactorDestination);
