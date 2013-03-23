@@ -381,6 +381,26 @@ package starling.extensions
             context.setVertexBufferAt(2, null);
         }
         
+        /** Initialize the <tt>ParticleSystem</tt> with particles distributed randomly throughout
+         *  their lifespans. */
+        public function populate(count:int):void
+        {
+            count = Math.min(count, mMaxCapacity - mNumParticles);
+            
+            if (mNumParticles + count > capacity)
+                raiseCapacity(count - capacity);
+            
+            var p:Particle;
+            for (var i:int=0; i<count; i++)
+            {
+                p = mParticles[i];
+                initParticle(p);
+                advanceParticle(p, Math.random() * p.totalTime);
+            }
+            
+            mNumParticles += count;
+        }
+        
         // program management
         
         private function createProgram():void
